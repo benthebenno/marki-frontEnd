@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
+import TopBar from "../components/topBar";
 function MainScreen() {
   return (
     <View style={styles.container}>
@@ -12,12 +13,7 @@ function MainScreen() {
         start={{ x: 0, y: 0 }} // Start point of the gradient (top-left)
         end={{ x: 1, y: 1 }} // End point of the gradient (bottom-right)
       >
-        <View style={styles.box}>
-          <Image
-            source={require("C:/Users/benra/marki-frontEnd/markiFrontEnd/images/MarkyLogo.png")}
-          ></Image>
-          <Text style={styles.text}>Marki: The AI Stock Picker Page 2</Text>
-        </View>
+        <TopBar></TopBar>
       </LinearGradient>
     </View>
   );
@@ -38,8 +34,8 @@ const styles = StyleSheet.create({
   gradientBox: {
     width: "100%",
     height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
     // borderRadius: 10,
   },
   text: {

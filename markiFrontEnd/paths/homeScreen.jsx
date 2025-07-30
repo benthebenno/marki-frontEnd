@@ -1,3 +1,4 @@
+// Inside HomeScreen.js
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";

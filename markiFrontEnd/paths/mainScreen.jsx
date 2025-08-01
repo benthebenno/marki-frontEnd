@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
 import TopBar from "../components/topBar";
+import StockList from "../components/stockList";
 function MainScreen() {
   return (
     <View style={styles.container}>
@@ -14,6 +15,7 @@ function MainScreen() {
         end={{ x: 1, y: 1 }} // End point of the gradient (bottom-right)
       >
         <TopBar></TopBar>
+        <StockList></StockList>
       </LinearGradient>
     </View>
   );

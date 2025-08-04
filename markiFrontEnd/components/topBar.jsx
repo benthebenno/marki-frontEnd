@@ -24,6 +24,12 @@ function TopBar() {
             <Text style={styles.modalText}>Menu</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
+              onPress={() => navigation.navigate("Add")}
+            >
+              <Text style={styles.textStyle}>Add New Stocks</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
             >
               <Text style={styles.textStyle}>Close Menu</Text>

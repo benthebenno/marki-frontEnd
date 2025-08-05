@@ -11,8 +11,20 @@ import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
 import { useNavigation } from "@react-navigation/native";
 import TopBar from "../components/topBar";
-import save from "../helpers/storage";
-import getValueFor from "../helpers/storage";
+import * as SecureStore from "expo-secure-store";
+
+export async function save(key, value) {
+  await SecureStore.setItemAsync(key, value);
+}
+export async function getValueFor(key) {
+  let result = await SecureStore.getItemAsync(key);
+  //   if (result) {
+  //     alert("🔐 Here's your value 🔐 \n" + result);
+  //   } else {
+  //     alert("No values stored under that key.");
+  //   }
+  return result;
+}
 
 function AddNew() {
   const DATA = require("../data/stocks.json");
@@ -23,8 +35,11 @@ function AddNew() {
       <Pressable
         style={styles.addButton}
         onPress={() => {
-          save(getValueFor("listNum"), id);
+          currentIndex = getValueFor("listNum");
+          console.log(currentIndex);
+          save(currentIndex, id);
           save("listNum", getValueFor("listNum") + 1);
+          console.log("Saved this stock to listNum" + currentIndex);
         }}
       >
         <Text style={styles.buttonText}>Add</Text>

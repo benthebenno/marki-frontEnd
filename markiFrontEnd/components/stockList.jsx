@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,12 +15,35 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 function StockList() {
-  const DATA = [
-    { id: "NVDA", title: "Test 1" },
-    { id: "JPM", title: "test 2" },
-    { id: "MA", title: "Test 3" },
-    // ... more items
-  ];
+  const checkAndSaveTrueKeys = async () => {
+    console.log("Key started");
+    inputKeys = [1, 2, 3];
+    const result = {};
+
+    for (const key of inputKeys) {
+      console.log(key);
+      const value = await SecureStore.getItemAsync(key);
+      console.log(value);
+      if (value === "true") {
+        result[key] = true;
+      }
+    }
+
+    const jsonContent = JSON.stringify(result, null, 2);
+
+    // Save JSON to file
+    const fileUri = FileSystem.documentDirectory + "currentStock.json";
+
+    await FileSystem.writeAsStringAsync(fileUri, jsonContent);
+
+    console.log("True keys saved to:", fileUri);
+  };
+
+  useEffect(() => {
+    console.log("happened");
+    checkAndSaveTrueKeys();
+  }, []);
+  const DATA = require("./currentStock.json");
 
   const Item = ({ title }) => (
     <View style={styles.itemContainer}>

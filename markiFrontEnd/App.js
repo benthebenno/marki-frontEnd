@@ -1,17 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./paths/homeScreen";
 import MainScreen from "./paths/mainScreen";
 import AddNew from "./paths/addNewScreen";
-import save from "./helpers/storage";
+// import save from "./helpers/storage";
+import * as SecureStore from "expo-secure-store";
+
+export async function save(key, value) {
+  await SecureStore.setItemAsync(key, value);
+}
+export async function getValueFor(key) {
+  let result = await SecureStore.getItemAsync(key);
+  if (result) {
+    alert("🔐 Here's your value 🔐 \n" + result);
+  } else {
+    alert("No values stored under that key.");
+  }
+}
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   useEffect(() => {
     save("listNum", 0);
+    console.log("happened");
   }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">

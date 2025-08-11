@@ -30,22 +30,18 @@ function AddNew() {
       <Pressable
         style={styles.addButton}
         onPress={() => {
-          currentIndex = getValueFor("listNum");
-          if (currentIndex) {
-            save(currentIndex, id);
-            save("listNum", getValueFor("listNum") + 1);
-            console.log("Saved this stock to listNum");
-            console.log(currentIndex);
-          } else {
-            console.log("print this does not exist");
-          }
+          console.log(id);
+          save(id, true);
         }}
       >
         <Text style={styles.buttonText}>Add</Text>
       </Pressable>
       <Pressable
         style={styles.removeButton}
-        onPress={() => console.log({ title })}
+        onPress={() => {
+          console.log(id);
+          save(id, false);
+        }}
       >
         <Text style={styles.buttonText}>Remove</Text>
       </Pressable>

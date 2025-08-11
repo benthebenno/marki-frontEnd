@@ -23,12 +23,6 @@ export async function getValueFor(key) {
 export default function App() {
   const Stack = createNativeStackNavigator();
 
-  useEffect(() => {
-    save("listNum", "0");
-    console.log("happened");
-    console.log(getValueFor("listNum"));
-  }, []);
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">

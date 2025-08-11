@@ -13,61 +13,59 @@ import { colors } from "../colors";
 import { useNavigation } from "@react-navigation/native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import * as SecureStore from "expo-secure-store";
 
+export async function save(key, value) {
+  await SecureStore.setItemAsync(key, value);
+}
+export async function getValueFor(key) {
+  let result = await SecureStore.getItemAsync(key);
+  if (result) {
+    return result;
+  } else {
+    console.log(key + " does not exist");
+  }
+  return result;
+}
 function StockList() {
-  const checkAndSaveTrueKeys = async () => {
-    console.log("Key started");
-    inputKeys = [1, 2, 3];
-    const result = {};
-
-    for (const key of inputKeys) {
-      console.log(key);
-      const value = await SecureStore.getItemAsync(key);
-      console.log(value);
-      if (value) {
-        result[key] = true;
-      }
-    }
-
-    const jsonContent = JSON.stringify(result, null, 2);
-
-    // Save JSON to file
-    const fileUri = FileSystem.documentDirectory + "currentStock.json";
-
-    await FileSystem.writeAsStringAsync(fileUri, jsonContent);
-
-    console.log("True keys saved to:", fileUri);
-  };
-
-  useEffect(() => {
-    console.log("happened");
-    checkAndSaveTrueKeys();
-  }, []);
   const DATA = require("./currentStock.json");
-
-  const Item = ({ title }) => (
-    <View style={styles.itemContainer}>
-      <View style={styles.imageBox}>
-        <Image
-          style={styles.image}
-          source={require("../images/testStock.png")}
-        ></Image>
+  const Item = async ({ id, title }) => {
+    const [returnVal, setReturnVal] = useState(
+      <View>
+        <Text>Hello</Text>
       </View>
-      <View style={styles.bottomRow}>
-        <Text style={styles.title}>{title}</Text>
-        <Pressable
-          style={styles.buttonBack}
-          onPress={() => console.log("Pressed")}
-        >
-          <FontAwesome name="long-arrow-right" size={45} color={colors.text} />
-        </Pressable>
-      </View>
-    </View>
-  );
+    );
+    if (await getValueFor(id)) {
+      setReturnVal(
+        <View style={styles.itemContainer}>
+          <View style={styles.imageBox}>
+            <Image
+              style={styles.image}
+              source={require("../images/testStock.png")}
+            ></Image>
+          </View>
+          <View style={styles.bottomRow}>
+            <Text style={styles.title}>{title}</Text>
+            <Pressable
+              style={styles.buttonBack}
+              onPress={() => console.log("Pressed")}
+            >
+              <FontAwesome
+                name="long-arrow-right"
+                size={45}
+                color={colors.text}
+              />
+            </Pressable>
+          </View>
+        </View>
+      );
+    }
+    return returnVal;
+  };
   return (
     <FlatList
       data={DATA}
-      renderItem={({ item }) => <Item title={item.title} />}
+      renderItem={({ item }) => <Item title={item.title} id={item.id} />}
       keyExtractor={(item) => item.id}
     />
   );

@@ -26,7 +26,7 @@ function AddNew() {
 
   const Item = ({ id, title }) => (
     <View style={styles.itemContainer}>
-      <Text style={styles.stockName}>{title}</Text>
+      <Text style={styles.stockName}>{id}</Text>
       <Pressable
         style={styles.addButton}
         onPress={() => {

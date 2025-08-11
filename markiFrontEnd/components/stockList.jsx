@@ -59,48 +59,32 @@ function StockList() {
       };
     }, [item.id]);
 
-    if (!exists) return <Text>Nothing</Text>;
+    if (!exists) return;
 
     return (
-      <View style={{ padding: 10 }}>
-        <Text>This exists {item.id}</Text>
-        <Text>Heloooo</Text>
+      <View style={styles.itemContainer}>
+        <View style={styles.imageBox}>
+          <Image
+            style={styles.image}
+            source={require("../images/testStock.png")}
+          ></Image>
+        </View>
+        <View style={styles.bottomRow}>
+          <Text style={styles.title}>{item.id}</Text>
+          <Pressable
+            style={styles.buttonBack}
+            onPress={() => console.log("Pressed")}
+          >
+            <FontAwesome
+              name="long-arrow-right"
+              size={45}
+              color={colors.text}
+            />
+          </Pressable>
+        </View>
       </View>
     );
   };
-
-  //   const Item = async ({ id, title }) => {
-  //     const [returnVal, setReturnVal] = useState(
-  //       <View>
-  //         <Text>Hello</Text>
-  //       </View>
-  //     );
-  //     if (await getValueFor(id)) {
-  //       setReturnVal(
-  //         <View style={styles.itemContainer}>
-  //           <View style={styles.imageBox}>
-  //             <Image
-  //               style={styles.image}
-  //               source={require("../images/testStock.png")}
-  //             ></Image>
-  //           </View>
-  //           <View style={styles.bottomRow}>
-  //             <Text style={styles.title}>{title}</Text>
-  //             <Pressable
-  //               style={styles.buttonBack}
-  //               onPress={() => console.log("Pressed")}
-  //             >
-  //               <FontAwesome
-  //                 name="long-arrow-right"
-  //                 size={45}
-  //                 color={colors.text}
-  //               />
-  //             </Pressable>
-  //           </View>
-  //         </View>
-  //       );
-  //     }
-  //     return returnVal;
 
   return (
     <FlatList

@@ -28,44 +28,84 @@ export async function getValueFor(key) {
   return result;
 }
 function StockList() {
-  const DATA = require("./currentStock.json");
-  const Item = async ({ id, title }) => {
-    const [returnVal, setReturnVal] = useState(
-      <View>
-        <Text>Hello</Text>
+  //   useEffect(() => {
+  //     SecureStore.setItemAsync("NVDA", "true");
+  //   }, []);
+  const DATA = require("../data/stocks.json");
+
+  const AsyncStockItem = ({ item }) => {
+    const [exists, setExists] = useState(false);
+
+    useEffect(() => {
+      let isMounted = true;
+
+      const checkStoredValue = async () => {
+        try {
+          console.log(item.id);
+          const value = await getValueFor(item.id);
+          console.log(value);
+          if (isMounted && value === "true") {
+            setExists(true);
+          }
+        } catch (e) {
+          console.warn(`Error checking item ${item.id}:`, e);
+        }
+      };
+
+      checkStoredValue();
+
+      return () => {
+        isMounted = false;
+      };
+    }, [item.id]);
+
+    if (!exists) return <Text>Nothing</Text>;
+
+    return (
+      <View style={{ padding: 10 }}>
+        <Text>This exists {item.id}</Text>
+        <Text>Heloooo</Text>
       </View>
     );
-    if (await getValueFor(id)) {
-      setReturnVal(
-        <View style={styles.itemContainer}>
-          <View style={styles.imageBox}>
-            <Image
-              style={styles.image}
-              source={require("../images/testStock.png")}
-            ></Image>
-          </View>
-          <View style={styles.bottomRow}>
-            <Text style={styles.title}>{title}</Text>
-            <Pressable
-              style={styles.buttonBack}
-              onPress={() => console.log("Pressed")}
-            >
-              <FontAwesome
-                name="long-arrow-right"
-                size={45}
-                color={colors.text}
-              />
-            </Pressable>
-          </View>
-        </View>
-      );
-    }
-    return returnVal;
   };
+
+  //   const Item = async ({ id, title }) => {
+  //     const [returnVal, setReturnVal] = useState(
+  //       <View>
+  //         <Text>Hello</Text>
+  //       </View>
+  //     );
+  //     if (await getValueFor(id)) {
+  //       setReturnVal(
+  //         <View style={styles.itemContainer}>
+  //           <View style={styles.imageBox}>
+  //             <Image
+  //               style={styles.image}
+  //               source={require("../images/testStock.png")}
+  //             ></Image>
+  //           </View>
+  //           <View style={styles.bottomRow}>
+  //             <Text style={styles.title}>{title}</Text>
+  //             <Pressable
+  //               style={styles.buttonBack}
+  //               onPress={() => console.log("Pressed")}
+  //             >
+  //               <FontAwesome
+  //                 name="long-arrow-right"
+  //                 size={45}
+  //                 color={colors.text}
+  //               />
+  //             </Pressable>
+  //           </View>
+  //         </View>
+  //       );
+  //     }
+  //     return returnVal;
+
   return (
     <FlatList
       data={DATA}
-      renderItem={({ item }) => <Item title={item.title} id={item.id} />}
+      renderItem={({ item }) => <AsyncStockItem item={item} />}
       keyExtractor={(item) => item.id}
     />
   );

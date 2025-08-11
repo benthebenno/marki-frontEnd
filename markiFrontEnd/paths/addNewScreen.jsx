@@ -31,7 +31,7 @@ function AddNew() {
         style={styles.addButton}
         onPress={() => {
           console.log(id);
-          save(id, true);
+          save(id, "true");
         }}
       >
         <Text style={styles.buttonText}>Add</Text>
@@ -40,7 +40,7 @@ function AddNew() {
         style={styles.removeButton}
         onPress={() => {
           console.log(id);
-          save(id, false);
+          save(id, "false");
         }}
       >
         <Text style={styles.buttonText}>Remove</Text>

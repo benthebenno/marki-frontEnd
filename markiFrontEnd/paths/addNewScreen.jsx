@@ -18,11 +18,6 @@ export async function save(key, value) {
 }
 export async function getValueFor(key) {
   let result = await SecureStore.getItemAsync(key);
-  //   if (result) {
-  //     alert("🔐 Here's your value 🔐 \n" + result);
-  //   } else {
-  //     alert("No values stored under that key.");
-  //   }
   return result;
 }
 
@@ -36,10 +31,14 @@ function AddNew() {
         style={styles.addButton}
         onPress={() => {
           currentIndex = getValueFor("listNum");
-          console.log(currentIndex);
-          save(currentIndex, id);
-          save("listNum", getValueFor("listNum") + 1);
-          console.log("Saved this stock to listNum" + currentIndex);
+          if (currentIndex) {
+            save(currentIndex, id);
+            save("listNum", getValueFor("listNum") + 1);
+            console.log("Saved this stock to listNum");
+            console.log(currentIndex);
+          } else {
+            console.log("print this does not exist");
+          }
         }}
       >
         <Text style={styles.buttonText}>Add</Text>

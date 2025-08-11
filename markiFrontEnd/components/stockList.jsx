@@ -24,7 +24,7 @@ function StockList() {
       console.log(key);
       const value = await SecureStore.getItemAsync(key);
       console.log(value);
-      if (value === "true") {
+      if (value) {
         result[key] = true;
       }
     }

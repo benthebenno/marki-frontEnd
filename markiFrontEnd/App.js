@@ -12,19 +12,21 @@ export async function save(key, value) {
 }
 export async function getValueFor(key) {
   let result = await SecureStore.getItemAsync(key);
-  if (result) {
-    alert("🔐 Here's your value 🔐 \n" + result);
-  } else {
-    alert("No values stored under that key.");
-  }
+  // if (result) {
+  //   alert("🔐 Here's your value 🔐 \n" + result);
+  // } else {
+  //   alert("No values stored under that key.");
+  // }
+  return result;
 }
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   useEffect(() => {
-    save("listNum", 0);
+    save("listNum", "0");
     console.log("happened");
+    console.log(getValueFor("listNum"));
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,13 +6,14 @@ import {
   Image,
   FlatList,
   Pressable,
+  TextInput,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
 import { useNavigation } from "@react-navigation/native";
 import TopBar from "../components/topBar";
 import * as SecureStore from "expo-secure-store";
-
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 export async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
 }
@@ -23,30 +24,32 @@ export async function getValueFor(key) {
 
 function AddNew() {
   const DATA = require("../data/stocks.json");
-
-  const Item = ({ id, title }) => (
-    <View style={styles.itemContainer}>
-      <Text style={styles.stockName}>{id}</Text>
-      <Pressable
-        style={styles.addButton}
-        onPress={() => {
-          console.log(id);
-          save(id, "true");
-        }}
-      >
-        <Text style={styles.buttonText}>Add</Text>
-      </Pressable>
-      <Pressable
-        style={styles.removeButton}
-        onPress={() => {
-          console.log(id);
-          save(id, "false");
-        }}
-      >
-        <Text style={styles.buttonText}>Remove</Text>
-      </Pressable>
-    </View>
-  );
+  const [searchQ, setSearchQ] = useState("");
+  const Item = ({ id, title, searchVal }) => {
+    return (
+      <View style={styles.itemContainer}>
+        <Text style={styles.stockName}>{id}</Text>
+        <Pressable
+          style={styles.addButton}
+          onPress={() => {
+            console.log(id);
+            save(id, "true");
+          }}
+        >
+          <Text style={styles.buttonText}>Add</Text>
+        </Pressable>
+        <Pressable
+          style={styles.removeButton}
+          onPress={() => {
+            console.log(id);
+            save(id, "false");
+          }}
+        >
+          <Text style={styles.buttonText}>Remove</Text>
+        </Pressable>
+      </View>
+    );
+  };
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -56,10 +59,21 @@ function AddNew() {
         end={{ x: 1, y: 1 }} // End point of the gradient (bottom-right)
       >
         <TopBar></TopBar>
-        <Text style={styles.header}>Add New Stuff</Text>
+        <Text style={styles.header}>Add New Stocks</Text>
+        <View style={styles.searchBox}>
+          <FontAwesome name="search" size={24} color="black" />
+          <TextInput
+            placeholder="Search"
+            style={styles.textBox}
+            value={searchQ}
+            onChangeText={setSearchQ}
+          ></TextInput>
+        </View>
         <FlatList
           data={DATA}
-          renderItem={({ item }) => <Item id={item.id} title={item.title} />}
+          renderItem={({ item }) => (
+            <Item id={item.id} title={item.title} searchVal={searchQ} />
+          )}
           keyExtractor={(item) => item.id}
         />
       </LinearGradient>
@@ -109,6 +123,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     marginBottom: 15,
   },
+  searchBox: {
+    backgroundColor: colors.box,
+    borderRadius: 10,
+    width: "60%",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 5,
+  },
   stockName: {
     fontSize: 30,
     color: colors.text,
@@ -120,6 +142,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingTop: 20,
     marginBottom: 10,
+  },
+  textBox: {
+    backgroundColor: colors.box,
+    paddingLeft: 5,
   },
 });
 export default AddNew;

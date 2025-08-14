@@ -39,7 +39,7 @@ function TopBar() {
       </Modal>
       <Pressable onPress={() => navigation.navigate("Main")}>
         <Image
-          source={require("C:/Users/benra/marki-frontEnd/markiFrontEnd/images/MarkyLogo.png")}
+          source={require("../images/MarkyLogo.png")}
           style={styles.image}
         ></Image>
       </Pressable>

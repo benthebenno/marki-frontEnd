@@ -26,30 +26,44 @@ function AddNew() {
   const DATA = require("../data/stocks.json");
   const [searchQ, setSearchQ] = useState("");
   const Item = ({ id, title, searchVal }) => {
-    return (
-      <View style={styles.itemContainer}>
-        <Text style={styles.stockName}>{id}</Text>
-        <Pressable
-          style={styles.addButton}
-          onPress={() => {
-            console.log(id);
-            save(id, "true");
-          }}
-        >
-          <Text style={styles.buttonText}>Add</Text>
-        </Pressable>
-        <Pressable
-          style={styles.removeButton}
-          onPress={() => {
-            console.log(id);
-            save(id, "false");
-          }}
-        >
-          <Text style={styles.buttonText}>Remove</Text>
-        </Pressable>
-      </View>
-    );
+    // console.log("start");
+    // console.log(title);
+    // console.log(searchVal);
+    if (id.includes(searchVal)) {
+      return (
+        <View style={styles.itemContainer}>
+          <Text style={styles.stockName}>{id}</Text>
+          <Pressable
+            style={styles.addButton}
+            onPress={() => {
+              console.log(id);
+              save(id, "true");
+            }}
+          >
+            <Text style={styles.buttonText}>Add</Text>
+          </Pressable>
+          <Pressable
+            style={styles.removeButton}
+            onPress={() => {
+              console.log(id);
+              save(id, "false");
+            }}
+          >
+            <Text style={styles.buttonText}>Remove</Text>
+          </Pressable>
+        </View>
+      );
+    }
   };
+  [optionsList, setOptionList] = useState(
+    <FlatList
+      data={DATA}
+      renderItem={({ item }) => (
+        <Item id={item.id} title={item.title} searchVal={searchQ} />
+      )}
+      keyExtractor={(item) => item.id}
+    />
+  );
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -67,15 +81,21 @@ function AddNew() {
             style={styles.textBox}
             value={searchQ}
             onChangeText={setSearchQ}
+            onSubmitEditing={() => {
+              // console.log("clicked sumbit");
+              setOptionList(
+                <FlatList
+                  data={DATA}
+                  renderItem={({ item }) => (
+                    <Item id={item.id} title={item.title} searchVal={searchQ} />
+                  )}
+                  keyExtractor={(item) => item.id}
+                />
+              );
+            }}
           ></TextInput>
         </View>
-        <FlatList
-          data={DATA}
-          renderItem={({ item }) => (
-            <Item id={item.id} title={item.title} searchVal={searchQ} />
-          )}
-          keyExtractor={(item) => item.id}
-        />
+        {optionsList}
       </LinearGradient>
     </View>
   );
@@ -130,6 +150,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 5,
+    marginBottom: 50,
   },
   stockName: {
     fontSize: 30,
@@ -146,6 +167,8 @@ const styles = StyleSheet.create({
   textBox: {
     backgroundColor: colors.box,
     paddingLeft: 5,
+    width: "60%",
+    height: "100%",
   },
 });
 export default AddNew;

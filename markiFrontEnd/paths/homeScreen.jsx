@@ -28,9 +28,7 @@ function HomeScreen() {
         end={{ x: 1, y: 1 }} // End point of the gradient (bottom-right)
       >
         <View style={styles.box}>
-          <Image
-            source={require("C:/Users/benra/marki-frontEnd/markiFrontEnd/images/MarkyLogo.png")}
-          ></Image>
+          <Image source={require("../images/MarkyLogo.png")}></Image>
           <Text style={styles.text}>Marki: The AI Stock Picker</Text>
         </View>
       </LinearGradient>

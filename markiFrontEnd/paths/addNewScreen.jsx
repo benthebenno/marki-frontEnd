@@ -23,16 +23,16 @@ export async function getValueFor(key) {
 }
 
 function AddNew() {
-  const DATA = require("../data/stocks.json");
+  const DATA = require("../data/stocks_cleaned.json");
   const [searchQ, setSearchQ] = useState("");
   const Item = ({ id, title, searchVal }) => {
     // console.log("start");
     // console.log(title);
     // console.log(searchVal);
-    if (id.includes(searchVal)) {
+    if (title.includes(searchVal)) {
       return (
         <View style={styles.itemContainer}>
-          <Text style={styles.stockName}>{id}</Text>
+          <Text style={styles.stockName}>{title}</Text>
           <Pressable
             style={styles.addButton}
             onPress={() => {

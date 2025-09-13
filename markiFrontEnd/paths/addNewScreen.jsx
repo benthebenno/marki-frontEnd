@@ -56,15 +56,10 @@ function AddNew() {
       );
     }
   };
-  [optionsList, setOptionList] = useState(
-    <FlatList
-      data={DATA}
-      renderItem={({ item }) => (
-        <Item id={item.id} title={item.title} searchVal={searchQ} />
-      )}
-      keyExtractor={(item) => item.id}
-    />
-  );
+  // [optionsList, setOptionList] = useState([
+
+  // ]);
+  // console.log(optionsList);
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -83,20 +78,19 @@ function AddNew() {
             value={searchQ}
             onChangeText={setSearchQ}
             onSubmitEditing={() => {
-              // console.log("clicked sumbit");
-              setOptionList(
-                <FlatList
-                  data={DATA}
-                  renderItem={({ item }) => (
-                    <Item id={item.id} title={item.title} searchVal={searchQ} />
-                  )}
-                  keyExtractor={(item) => item.id}
-                />
-              );
+              console.log("clicked sumbit");
+              setOptionList();
             }}
           ></TextInput>
         </View>
-        {optionsList}
+        <FlatList
+          data={DATA}
+          renderItem={({ item }) => (
+            <Item id={item.id} title={item.title} searchVal={searchQ} />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+        ,
       </LinearGradient>
     </View>
   );

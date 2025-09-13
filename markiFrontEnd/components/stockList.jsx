@@ -14,7 +14,6 @@ import { useNavigation } from "@react-navigation/native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as SecureStore from "expo-secure-store";
-import ImageOptions from "../data/image_list";
 
 export async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
@@ -62,10 +61,20 @@ function StockList() {
 
     if (!exists) return;
     console.log(item.title);
+    // image_path =
+    //   ;
     return (
       <View style={styles.itemContainer}>
         <View style={styles.imageBox}>
-          <Image style={styles.image} source={ImageOptions[item.title]}></Image>
+          <Image
+            style={styles.image}
+            source={{
+              uri:
+                "https://benthebenno.github.io/graphsss/" +
+                item.title +
+                "_all_data.png",
+            }}
+          ></Image>
         </View>
         <View style={styles.bottomRow}>
           <Text style={styles.title}>{item.title}</Text>

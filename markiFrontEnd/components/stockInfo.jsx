@@ -26,7 +26,10 @@ function DetailScreen({ route }) {
           style={styles.removeButton}
           onPress={() => {
             save(pageId, "false");
-            navigation.goBack();
+            save(1, "true");
+            save(1, "false");
+            // this.forceUpdate();
+            navigation.navigate("Main");
           }}
         >
           <Text style={styles.buttonText}>Remove This Stock</Text>

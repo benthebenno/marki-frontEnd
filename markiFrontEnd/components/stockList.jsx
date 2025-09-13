@@ -83,6 +83,18 @@ function StockList() {
                 pageTitle: item.title,
                 pageContent: "hlrpprtgrlpglrg",
                 pageId: item.id,
+                imagePath2Weeks:
+                  "https://benthebenno.github.io/graphsss/" +
+                  item.title +
+                  "_2weeks.png",
+                imagePath1Month:
+                  "https://benthebenno.github.io/graphsss/" +
+                  item.title +
+                  "_1month.png",
+                imagePathAll:
+                  "https://benthebenno.github.io/graphsss/" +
+                  item.title +
+                  "_all_data.png",
               })
             }
           >

@@ -41,9 +41,9 @@ function StockList() {
 
       const checkStoredValue = async () => {
         try {
-          console.log(item.id);
+          // console.log(item.id);
           const value = await getValueFor(item.id);
-          console.log(value);
+          // console.log(value);
           if (isMounted && value === "true") {
             setExists(true);
           }
@@ -60,7 +60,7 @@ function StockList() {
     }, [item.id]);
 
     if (!exists) return;
-    console.log(item.title);
+    // console.log(item.title);
     // image_path =
     //   ;
     return (

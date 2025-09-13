@@ -23,8 +23,15 @@ export async function getValueFor(key) {
 }
 
 function AddNew() {
-  const DATA = require("../data/stocks_cleaned.json");
+  const [currentData, setCurrentData] = useState([]);
   const [searchQ, setSearchQ] = useState("");
+  const DATA = require("../data/stocks_cleaned.json");
+  useEffect(() => {
+    // Filter the data and update the state
+    const filteredUsers = DATA.filter((item) => item.title.includes(searchQ));
+    setCurrentData(filteredUsers);
+  }, []);
+
   const Item = ({ id, title, searchVal }) => {
     // console.log("start");
     // console.log(title);
@@ -77,20 +84,15 @@ function AddNew() {
             style={styles.textBox}
             value={searchQ}
             onChangeText={setSearchQ}
-            onSubmitEditing={() => {
-              console.log("clicked sumbit");
-              setOptionList();
-            }}
           ></TextInput>
         </View>
         <FlatList
-          data={DATA}
+          data={currentData}
           renderItem={({ item }) => (
             <Item id={item.id} title={item.title} searchVal={searchQ} />
           )}
           keyExtractor={(item) => item.id}
         />
-        ,
       </LinearGradient>
     </View>
   );

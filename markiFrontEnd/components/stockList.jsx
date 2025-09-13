@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as SecureStore from "expo-secure-store";
+import ImageOptions from "../data/image_list";
 
 export async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
@@ -31,7 +32,7 @@ function StockList() {
   //   useEffect(() => {
   //     SecureStore.setItemAsync("NVDA", "true");
   //   }, []);
-  const DATA = require("../data/stocks.json");
+  const DATA = require("../data/stocks_cleaned.json");
 
   const AsyncStockItem = ({ item }) => {
     const [exists, setExists] = useState(false);
@@ -60,17 +61,14 @@ function StockList() {
     }, [item.id]);
 
     if (!exists) return;
-
+    console.log(item.title);
     return (
       <View style={styles.itemContainer}>
         <View style={styles.imageBox}>
-          <Image
-            style={styles.image}
-            source={require("../images/testStock.png")}
-          ></Image>
+          <Image style={styles.image} source={ImageOptions[item.title]}></Image>
         </View>
         <View style={styles.bottomRow}>
-          <Text style={styles.title}>{item.id}</Text>
+          <Text style={styles.title}>{item.title}</Text>
           <Pressable
             style={styles.buttonBack}
             onPress={() => console.log("Pressed")}

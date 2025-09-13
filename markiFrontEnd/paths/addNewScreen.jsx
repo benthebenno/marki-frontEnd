@@ -36,6 +36,7 @@ function AddNew() {
           <Pressable
             style={styles.addButton}
             onPress={() => {
+              console.log("will add this stock:");
               console.log(id);
               save(id, "true");
             }}

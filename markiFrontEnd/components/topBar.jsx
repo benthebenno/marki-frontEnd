@@ -43,7 +43,7 @@ function TopBar() {
           style={styles.image}
         ></Image>
       </Pressable>
-      <Pressable onPress={() => setModalVisible(true)}>
+      <Pressable onPress={() => setModalVisible(!modalVisible)}>
         <AntDesign name="menufold" size={45} color="black" />
       </Pressable>
     </View>
@@ -70,16 +70,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalView: {
+    flex: 0.5,
+    width: "70%",
     margin: 20,
     backgroundColor: "#1d2121ff",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
   },
   textStyle: {
     color: colors.text,

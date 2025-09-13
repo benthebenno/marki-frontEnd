@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
 import TopBar from "../components/topBar";
 import StockList from "../components/stockList";
+
 function MainScreen() {
   return (
     <View style={styles.container}>

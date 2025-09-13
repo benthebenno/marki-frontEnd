@@ -28,11 +28,8 @@ export async function getValueFor(key) {
   return result;
 }
 function StockList() {
-  //   useEffect(() => {
-  //     SecureStore.setItemAsync("NVDA", "true");
-  //   }, []);
   const DATA = require("../data/stocks_cleaned.json");
-
+  const navigation = useNavigation();
   const AsyncStockItem = ({ item }) => {
     const [exists, setExists] = useState(false);
 
@@ -80,7 +77,13 @@ function StockList() {
           <Text style={styles.title}>{item.title}</Text>
           <Pressable
             style={styles.buttonBack}
-            onPress={() => console.log("Pressed")}
+            onPress={() =>
+              navigation.navigate("Info", {
+                pageTitle: item.title,
+                pageContent: "hlrpprtgrlpglrg",
+                pageId: item.id,
+              })
+            }
           >
             <FontAwesome
               name="long-arrow-right"

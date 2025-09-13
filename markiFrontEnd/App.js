@@ -6,6 +6,7 @@ import MainScreen from "./paths/mainScreen";
 import AddNew from "./paths/addNewScreen";
 // import save from "./helpers/storage";
 import * as SecureStore from "expo-secure-store";
+import DetailScreen from "./components/stockInfo";
 
 export async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
@@ -41,6 +42,11 @@ export default function App() {
           component={AddNew}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Info"
+          component={DetailScreen}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

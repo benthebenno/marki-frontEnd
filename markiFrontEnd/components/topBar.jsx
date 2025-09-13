@@ -4,7 +4,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
 import { useNavigation } from "@react-navigation/native";
 import AntDesign from "@expo/vector-icons/AntDesign";
-
 function TopBar() {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,7 +43,7 @@ function TopBar() {
         ></Image>
       </Pressable>
       <Pressable onPress={() => setModalVisible(!modalVisible)}>
-        <AntDesign name="menufold" size={45} color="black" />
+        <AntDesign name="menu-fold" size={45} color="black" />
       </Pressable>
     </View>
   );

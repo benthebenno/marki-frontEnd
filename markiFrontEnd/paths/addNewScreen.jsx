@@ -7,6 +7,7 @@ import {
   FlatList,
   Pressable,
   TextInput,
+  Vibration,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
@@ -46,6 +47,7 @@ function AddNew() {
               console.log("will add this stock:");
               console.log(id);
               save(id, "true");
+              Vibration.vibrate(500);
             }}
           >
             <Text style={styles.buttonText}>Add</Text>

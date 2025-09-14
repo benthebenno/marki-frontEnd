@@ -21,6 +21,17 @@ function TopBar() {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Menu</Text>
+
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => {
+                navigation.navigate("About");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>About Marki</Text>
+            </Pressable>
+
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => {
@@ -31,7 +42,7 @@ function TopBar() {
               <Text style={styles.textStyle}>Add New Stocks</Text>
             </Pressable>
 
-            <Pressable
+            {/* <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => {
                 navigation.navigate("ModelInfo");
@@ -39,7 +50,7 @@ function TopBar() {
               }}
             >
               <Text style={styles.textStyle}>Model Informations</Text>
-            </Pressable>
+            </Pressable> */}
 
             <Pressable
               style={[styles.button, styles.buttonClose]}
@@ -49,16 +60,6 @@ function TopBar() {
               }}
             >
               <Text style={styles.textStyle}>Current Rankings</Text>
-            </Pressable>
-
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-                navigation.navigate("About");
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>About Marki</Text>
             </Pressable>
 
             <Pressable

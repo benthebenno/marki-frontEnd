@@ -23,10 +23,44 @@ function TopBar() {
             <Text style={styles.modalText}>Menu</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => navigation.navigate("Add")}
+              onPress={() => {
+                navigation.navigate("Add");
+                setModalVisible(!modalVisible);
+              }}
             >
               <Text style={styles.textStyle}>Add New Stocks</Text>
             </Pressable>
+
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => {
+                navigation.navigate("ModelInfo");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>Model Informations</Text>
+            </Pressable>
+
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => {
+                navigation.navigate("CurRank");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>Current Rankings</Text>
+            </Pressable>
+
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => {
+                navigation.navigate("About");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>About Marki</Text>
+            </Pressable>
+
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
@@ -86,13 +120,16 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontWeight: "bold",
     textAlign: "center",
+    marginBottom: 10,
+    fontSize: 18,
   },
   modalText: {
     // marginBottom: 15,
-    fontSize: 30,
+    fontSize: 40,
     textAlign: "center",
     color: colors.text,
     fontWeight: "bold",
+    marginBottom: 15,
   },
 });
 

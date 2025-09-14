@@ -84,6 +84,7 @@ function AddNew() {
             style={styles.textBox}
             value={searchQ}
             onChangeText={setSearchQ}
+            autoCapitalize="characters"
           ></TextInput>
         </View>
         <FlatList

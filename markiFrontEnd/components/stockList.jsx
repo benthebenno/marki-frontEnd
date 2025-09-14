@@ -24,7 +24,7 @@ export async function getValueFor(key) {
   if (result) {
     return result;
   } else {
-    console.log(key + " does not exist");
+    // console.log(key + " does not exist");
   }
   return result;
 }
@@ -68,7 +68,9 @@ function StockList() {
             style={styles.image}
             source={{
               uri:
-                "https://benthebenno.github.io/graphsss/" +
+                "https://benthebenno.github.io/" +
+                item.title[0] +
+                "/" +
                 item.title +
                 "_all_data.png",
             }}
@@ -84,15 +86,21 @@ function StockList() {
                 pageContent: "hlrpprtgrlpglrg",
                 pageId: item.id,
                 imagePath2Weeks:
-                  "https://benthebenno.github.io/graphsss/" +
+                  "https://benthebenno.github.io/" +
+                  item.title[0] +
+                  "/" +
                   item.title +
                   "_2weeks.png",
                 imagePath1Month:
-                  "https://benthebenno.github.io/graphsss/" +
+                  "https://benthebenno.github.io/" +
+                  item.title[0] +
+                  "/" +
                   item.title +
                   "_1month.png",
                 imagePathAll:
-                  "https://benthebenno.github.io/graphsss/" +
+                  "https://benthebenno.github.io/" +
+                  item.title[0] +
+                  "/" +
                   item.title +
                   "_all_data.png",
               })

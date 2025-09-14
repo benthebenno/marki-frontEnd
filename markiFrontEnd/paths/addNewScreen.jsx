@@ -27,6 +27,7 @@ function AddNew() {
   const [currentData, setCurrentData] = useState([]);
   const [searchQ, setSearchQ] = useState("");
   const DATA = require("../data/stocks_cleaned.json");
+
   useEffect(() => {
     // Filter the data and update the state
     const filteredUsers = DATA.filter((item) => item.title.includes(searchQ));
@@ -34,33 +35,67 @@ function AddNew() {
   }, []);
 
   const Item = ({ id, title, searchVal }) => {
-    // console.log("start");
-    // console.log(title);
-    // console.log(searchVal);
+    const [curButton, setCurButton] = useState(true);
+    const AddButton = (
+      <Pressable
+        style={styles.addButton}
+        onPress={() => {
+          save(id, "true");
+          setCurButton(false);
+        }}
+      >
+        <Text style={styles.buttonText}>Add</Text>
+      </Pressable>
+    );
+    const RemoveButton = (
+      <Pressable
+        style={styles.removeButton}
+        onPress={() => {
+          save(id, "false");
+          setCurButton(true);
+        }}
+      >
+        <Text style={styles.buttonText}>Remove</Text>
+      </Pressable>
+    );
+    useEffect(() => {
+      let isMounted = true;
+
+      const checkStoredValue = async () => {
+        try {
+          // console.log(item.id);
+          const value = await getValueFor(id);
+          // console.log(value);
+          if (isMounted && value === "true") {
+            setCurButton(false);
+          } else {
+            setCurButton(true);
+          }
+        } catch (e) {
+          console.warn(`Error checking item ${id}:`, e);
+        }
+      };
+
+      checkStoredValue();
+
+      return () => {
+        isMounted = false;
+      };
+    }, [id]);
+    const ButtonFunction = () => {
+      if (curButton) {
+        return AddButton;
+      } else {
+        return RemoveButton;
+      }
+    };
     if (title.includes(searchVal)) {
       return (
         <View style={styles.itemContainer}>
           <Text style={styles.stockName}>{title}</Text>
-          <Pressable
-            style={styles.addButton}
-            onPress={() => {
-              console.log("will add this stock:");
-              console.log(id);
-              save(id, "true");
-              Vibration.vibrate(500);
-            }}
-          >
-            <Text style={styles.buttonText}>Add</Text>
-          </Pressable>
-          <Pressable
-            style={styles.removeButton}
-            onPress={() => {
-              console.log(id);
-              save(id, "false");
-            }}
-          >
-            <Text style={styles.buttonText}>Remove</Text>
-          </Pressable>
+          {/* <View>{curButton ? AddButton : RemoveButton}</View> */}
+          {curButton && AddButton}
+          {!curButton && RemoveButton}
         </View>
       );
     }

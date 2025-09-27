@@ -32,35 +32,6 @@ function StockList() {
   const DATA = require("../data/stocks_cleaned.json");
   const navigation = useNavigation();
   const AsyncStockItem = ({ item }) => {
-    const [exists, setExists] = useState(false);
-
-    useEffect(() => {
-      let isMounted = true;
-
-      const checkStoredValue = async () => {
-        try {
-          // console.log(item.id);
-          const value = await getValueFor(item.id);
-          // console.log(value);
-          if (isMounted && value === "true") {
-            setExists(true);
-          }
-        } catch (e) {
-          console.warn(`Error checking item ${item.id}:`, e);
-        }
-      };
-
-      checkStoredValue();
-
-      return () => {
-        isMounted = false;
-      };
-    }, [item.id]);
-
-    if (!exists) return;
-    // console.log(item.title);
-    // image_path =
-    //   ;
     return (
       <View style={styles.itemContainer}>
         <View style={styles.imageBox}>
@@ -74,6 +45,7 @@ function StockList() {
                 item.title +
                 "_all_data.png",
             }}
+            resizeMode="cover"
           ></Image>
         </View>
         <View style={styles.bottomRow}>
@@ -122,6 +94,7 @@ function StockList() {
       data={DATA}
       renderItem={({ item }) => <AsyncStockItem item={item} />}
       keyExtractor={(item) => item.id}
+      style={{ flex: 1 }}
     />
   );
 }
@@ -131,10 +104,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    flex: 1,
   },
   buttonBack: {
     // width: 100,
     // height: 100,
+    // flex: -1,
     backgroundColor: "#000000ff",
     alignItems: "center",
     justifyContent: "center",
@@ -144,21 +119,26 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     backgroundColor: "#D5E2F4",
-    padding: 20,
+    padding: 10,
     marginVertical: 8,
     marginHorizontal: 16,
     borderRadius: 10,
+    // flex: -1,
   },
   image: {
-    width: "100%",
-    height: 200,
+    // flex: 1,
+    aspectRatio: 1,
+    width: 100,
     borderRadius: 10,
   },
   imageBox: {
-    flex: 1,
+    // flex: 1,
+    // width: 100,
+    // height: 100,
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: 20,
+    width: "100%",
   },
   title: {
     fontSize: 28,

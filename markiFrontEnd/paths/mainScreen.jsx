@@ -31,12 +31,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   gradientBox: {
-    width: "100%",
-    height: "100%",
+    flex: 1,
     // justifyContent: "center",
     // alignItems: "center",
     // borderRadius: 10,

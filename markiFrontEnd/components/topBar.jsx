@@ -9,76 +9,11 @@ function TopBar() {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.container}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Menu</Text>
-
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-                navigation.navigate("About");
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>About Marki</Text>
-            </Pressable>
-
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-                navigation.navigate("Add");
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>Add New Stocks</Text>
-            </Pressable>
-
-            {/* <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-                navigation.navigate("ModelInfo");
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>Model Informations</Text>
-            </Pressable> */}
-
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-                navigation.navigate("CurRank");
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>Current Rankings</Text>
-            </Pressable>
-
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Close Menu</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
       <Pressable onPress={() => navigation.navigate("Main")}>
         <Image
           source={require("../images/MarkyLogo.png")}
           style={styles.image}
         ></Image>
-      </Pressable>
-      <Pressable onPress={() => setModalVisible(!modalVisible)}>
-        <AntDesign name="menu-fold" size={45} color="black" />
       </Pressable>
     </View>
   );

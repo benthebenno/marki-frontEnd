@@ -15,6 +15,22 @@ function TopBar() {
           style={styles.image}
         ></Image>
       </Pressable>
+      <Pressable>
+        <Text
+          style={{ fontSize: 20, color: "white" }}
+          onPress={() => navigation.navigate("CurRank")}
+        >
+          Rankings
+        </Text>
+      </Pressable>
+      <Pressable>
+        <Text
+          style={{ fontSize: 20, color: "white" }}
+          onPress={() => navigation.navigate("About")}
+        >
+          About Marki
+        </Text>
+      </Pressable>
     </View>
   );
 }
@@ -22,16 +38,18 @@ function TopBar() {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "12%",
+    height: 50,
     backgroundColor: colors.topBar,
-    paddingTop: 35,
+    // paddingTop: 35,
     padding: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
+    paddingLeft: 50,
+    paddingRight: 50,
   },
-  image: { width: 60, height: 60, resizeMode: "contain" },
+  image: { width: 40, height: 40, resizeMode: "contain" },
 
   centeredView: {
     flex: 1,

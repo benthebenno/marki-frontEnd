@@ -6,7 +6,11 @@ import TopBar from "../components/topBar";
 import StockList from "../components/stockList";
 
 function AboutUs() {
-  return <View></View>;
+  return (
+    <View>
+      <TopBar></TopBar>
+    </View>
+  );
 }
 
 export default AboutUs;

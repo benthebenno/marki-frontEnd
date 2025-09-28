@@ -15,7 +15,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as SecureStore from "expo-secure-store";
 import { useFocusEffect } from "@react-navigation/native";
-
+import { TextInput, ScrollView } from "react-native-web";
 export async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
 }
@@ -31,6 +31,10 @@ export async function getValueFor(key) {
 function StockList() {
   const DATA = require("../data/stocks_cleaned.json");
   const navigation = useNavigation();
+  const [searchQ, setSearchQ] = useState("");
+  const filteredData = DATA.filter(
+    (item) => item.title.includes(searchQ.toUpperCase()) // since you auto-capitalize
+  );
   const AsyncStockItem = ({ item }) => {
     return (
       <View style={styles.itemContainer}>
@@ -90,12 +94,26 @@ function StockList() {
   };
 
   return (
-    <FlatList
-      data={DATA}
-      renderItem={({ item }) => <AsyncStockItem item={item} />}
-      keyExtractor={(item) => item.id}
-      style={{ flex: 1 }}
-    />
+    <ScrollView>
+      <View style={styles.topPart}>
+        <View style={styles.searchBox}>
+          <FontAwesome name="search" size={24} color="black" />
+          <TextInput
+            placeholder="Search"
+            style={styles.textBox}
+            value={searchQ}
+            onChangeText={setSearchQ}
+            autoCapitalize="characters"
+          ></TextInput>
+        </View>
+      </View>
+      <FlatList
+        data={filteredData}
+        renderItem={({ item }) => <AsyncStockItem item={item} />}
+        keyExtractor={(item) => item.id}
+        style={{ flex: 1 }}
+      />
+    </ScrollView>
   );
 }
 
@@ -118,17 +136,21 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   itemContainer: {
+    alignSelf: "center",
     backgroundColor: "#D5E2F4",
-    padding: 10,
+    padding: 15,
     marginVertical: 8,
     marginHorizontal: 16,
     borderRadius: 10,
+    width: 750,
+    height: 500,
     // flex: -1,
   },
   image: {
     // flex: 1,
-    aspectRatio: 1,
-    width: 100,
+    aspectRatio: 0.25,
+    height: 400,
+    width: 500,
     borderRadius: 10,
   },
   imageBox: {
@@ -140,10 +162,32 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     width: "100%",
   },
+  topPart: {
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 25,
+  },
   title: {
     fontSize: 28,
     color: colors.text,
     fontWeight: "heavy",
+  },
+  searchBox: {
+    backgroundColor: colors.box,
+    borderRadius: 10,
+    width: "60%",
+    flexDirection: "row",
+    alignContent: "center",
+    alignContent: "center",
+    padding: 5,
+    marginBottom: 50,
+  },
+  textBox: {
+    backgroundColor: colors.box,
+    paddingLeft: 5,
+    width: "60%",
+    height: "100%",
   },
 });
 

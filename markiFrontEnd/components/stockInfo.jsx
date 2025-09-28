@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList } from "react-native";
 import { colors } from "../colors";
 import { LinearGradient } from "expo-linear-gradient";
 import TopBar from "./topBar";
 import { Pressable } from "react-native";
 import { save } from "../paths/addNewScreen";
 import { useNavigation } from "@react-navigation/native";
-import { ScrollView } from "react-native";
+import { ScrollView } from "react-native-web";
+import { useState, useEffect } from "react";
 function DetailScreen({ route }) {
   const {
     pageTitle,
@@ -17,8 +18,36 @@ function DetailScreen({ route }) {
     imagePathAll,
   } = route.params;
   const navigation = useNavigation();
+  const csvFileUrl = "https://benthebenno.github.io/jesse_score_rankings.csv"; // Replace with your actual URL
+  const [csvData, setCsvData] = useState([]);
+
+  readRemoteFile(csvFileUrl, {
+    complete: (results) => {
+      console.log("Parsed CSV data:", results.data);
+      // results.data will contain the parsed CSV data as an array of arrays or objects
+    },
+    error: (error) => {
+      console.error("Error parsing CSV:", error);
+    },
+    // Optional: Add other configuration options like header: true if your CSV has a header row
+  });
+
+  useEffect(() => {
+    readRemoteFile(csvFileUrl, {
+      complete: (results) => {
+        setCsvData(results.data);
+        // console.log("csv parsed");
+        // console.log(csvData);
+      },
+      error: (error) => {
+        console.error("Error parsing CSV:", error);
+      },
+      header: true, // If your CSV has a header row
+    });
+  }, []);
+
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <TopBar></TopBar>
       <ScrollView>
         <LinearGradient
@@ -54,22 +83,23 @@ function DetailScreen({ route }) {
               resizeMode="contain"
             ></Image>
           </View>
-          <Text>{pageContent}</Text>
-          <Pressable
-            style={styles.removeButton}
-            onPress={() => {
-              save(pageId, "false");
-
-              // This is not a permanant fix you shuld update it so it saves, then removes a test stock
-              // which does not exist
-              save(1, "true");
-              save(1, "false");
-              // this.forceUpdate();
-              navigation.navigate("Main");
-            }}
-          >
-            <Text style={styles.buttonText}>Remove This Stock</Text>
-          </Pressable>
+          {csvData.length > 0 ? (
+            <FlatList
+              data={csvData}
+              renderItem={({ item }) => (
+                <View>
+                  <Text style={{ color: "white" }}>{item.Rank}</Text>
+                  <Text style={{ color: "white" }}>{item.Stock}</Text>
+                  <Text style={{ color: "white" }}>
+                    {item.Predicted_Change_Percent}
+                  </Text>
+                </View>
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          ) : (
+            <Text>Loading CSV data...</Text>
+          )}
         </LinearGradient>
       </ScrollView>
     </View>

@@ -8,6 +8,8 @@ import { save } from "../paths/addNewScreen";
 import { useNavigation } from "@react-navigation/native";
 import { ScrollView } from "react-native-web";
 import { useState, useEffect } from "react";
+import { readRemoteFile } from "react-native-csv";
+
 function DetailScreen({ route }) {
   const {
     pageTitle,
@@ -84,19 +86,17 @@ function DetailScreen({ route }) {
             ></Image>
           </View>
           {csvData.length > 0 ? (
-            <FlatList
-              data={csvData}
-              renderItem={({ item }) => (
-                <View>
-                  <Text style={{ color: "white" }}>{item.Rank}</Text>
-                  <Text style={{ color: "white" }}>{item.Stock}</Text>
-                  <Text style={{ color: "white" }}>
-                    {item.Predicted_Change_Percent}
+            csvData
+              .filter((item) => item.Stock === pageTitle)
+              .map((item, index) => (
+                <View style={styles.manyItems} key={index}>
+                  <Text style={styles.miniText}>Rank: {item.Rank}</Text>
+                  <Text style={styles.miniText}>Stock: {item.Stock}</Text>
+                  <Text style={styles.miniText}>
+                    Change: {item.Predicted_Change_Percent}
                   </Text>
                 </View>
-              )}
-              keyExtractor={(item, index) => index.toString()}
-            />
+              ))
           ) : (
             <Text>Loading CSV data...</Text>
           )}
@@ -107,11 +107,14 @@ function DetailScreen({ route }) {
 }
 const styles = StyleSheet.create({
   title: {
-    fontSize: 45,
+    fontSize: 85,
+    color: colors.secondText,
+    fontWeight: 80,
   },
   titleBox: {
     marginTop: 40,
     alignSelf: "center",
+    marginBottom: 25,
   },
   gradientBox: {
     width: "100%",
@@ -138,14 +141,29 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   subheading: {
-    alignItems: "flex-start",
+    // alignItems: "center",
+    alignSelf: "center",
     fontSize: 24,
+    color: colors.secondText,
+    // marginLeft: 25,
   },
   image: {
     width: 350,
     height: 350,
-    // borderRadius: 20,
+    // borderRadius: ,
     alignSelf: "center",
+  },
+  manyItems: {
+    marginTop: 20,
+    marginBottom: 40,
+    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "60%",
+  },
+  miniText: {
+    color: colors.secondText,
+    fontSize: 20,
   },
 });
 export default DetailScreen;

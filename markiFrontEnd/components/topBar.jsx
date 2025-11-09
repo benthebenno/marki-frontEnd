@@ -9,11 +9,20 @@ function TopBar() {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => navigation.navigate("Main")}>
+      <Pressable
+        onPress={() => navigation.navigate("Main")}
+        style={{ flexDirection: "row", alignItems: "center" }}
+      >
         <Image
           source={require("../images/MarkyLogo.png")}
           style={styles.image}
         ></Image>
+        <Text
+          style={{ fontSize: 20, color: "white", marginLeft: 10 }}
+          onPress={() => navigation.navigate("CurRank")}
+        >
+          Home
+        </Text>
       </Pressable>
       <Pressable>
         <Text

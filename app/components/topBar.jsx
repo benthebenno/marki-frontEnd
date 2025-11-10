@@ -11,7 +11,12 @@ function TopBar() {
     <View style={styles.container}>
       <Pressable
         onPress={() => navigation.navigate("Main")}
-        style={{ flexDirection: "row", alignItems: "center" }}
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+
+          paddingRight: 100,
+        }}
       >
         <Image
           source={require("../images/MarkyLogo.png")}

@@ -3,7 +3,7 @@
   "license": "0BSD",
   "version": "1.0.0",
   "main": "app/index.js",
-  "homepage": "https://benthebenno.github.io/marki-frontEnd/github_pages",
+  "homepage": "https://benthebenno.github.io/marki-frontEnd/",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "gh-pages": "^6.3.0",
     "prettier": "3.6.2"
   },
   "private": true

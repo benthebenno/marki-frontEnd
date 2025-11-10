@@ -58,10 +58,25 @@ function DetailScreen({ route }) {
           start={{ x: 0, y: 0 }} // Start point of the gradient (top-left)
           end={{ x: 1, y: 1 }} // End point of the gradient (bottom-right)
         >
-          <View style={styles.titleBox}>
+          {/* <View style={styles.titleBox}>
             <Text style={styles.title}>{pageTitle}</Text>
-          </View>
+          </View> */}
           <View>
+            {csvData.length > 0 ? (
+              csvData
+                .filter((item) => item.Stock === pageTitle)
+                .map((item, index) => (
+                  <View style={styles.manyItems} key={index}>
+                    <Text style={styles.miniText}>Rank: {item.Rank}</Text>
+                    <Text style={styles.miniText}>Stock: {item.Stock}</Text>
+                    <Text style={styles.miniText}>
+                      Change: {item.Predicted_Change_Percent}
+                    </Text>
+                  </View>
+                ))
+            ) : (
+              <Text>Loading CSV data...</Text>
+            )}
             <Text style={styles.subheading}>All Data</Text>
             <Image
               source={{ uri: imagePathAll }}
@@ -85,21 +100,6 @@ function DetailScreen({ route }) {
               resizeMode="contain"
             ></Image>
           </View>
-          {csvData.length > 0 ? (
-            csvData
-              .filter((item) => item.Stock === pageTitle)
-              .map((item, index) => (
-                <View style={styles.manyItems} key={index}>
-                  <Text style={styles.miniText}>Rank: {item.Rank}</Text>
-                  <Text style={styles.miniText}>Stock: {item.Stock}</Text>
-                  <Text style={styles.miniText}>
-                    Change: {item.Predicted_Change_Percent}
-                  </Text>
-                </View>
-              ))
-          ) : (
-            <Text>Loading CSV data...</Text>
-          )}
         </LinearGradient>
       </ScrollView>
     </View>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 85,
     color: colors.secondText,
-    fontWeight: 80,
+    // fontWeight: 80,
   },
   titleBox: {
     marginTop: 40,
@@ -141,29 +141,36 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   subheading: {
-    // alignItems: "center",
     alignSelf: "center",
-    fontSize: 24,
+    // alignSelf: "flex-start",
+    fontSize: 25,
     color: colors.secondText,
+    // marginLeft: 60,
+
     // marginLeft: 25,
   },
   image: {
-    width: 350,
-    height: 350,
+    width: 450,
+    height: 450,
     // borderRadius: ,
     alignSelf: "center",
+    marginBottom: 20,
   },
   manyItems: {
-    marginTop: 20,
-    marginBottom: 40,
+    marginTop: 40,
+    marginBottom: 60,
+    marginLeft: 20,
+    marginRight: 20,
     alignSelf: "center",
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: "60%",
+    // backgroundColor: "black",
+    justifyContent: "space-evenly",
+    width: "100%",
   },
   miniText: {
     color: colors.secondText,
-    fontSize: 20,
+    fontSize: 30,
+    width: 180,
   },
 });
 export default DetailScreen;

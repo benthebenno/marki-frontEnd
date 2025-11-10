@@ -62,7 +62,7 @@ function AboutUs() {
             feeds the values into the Markov chain and the first neural network,
             gaining all the predictions, then feeds those into the second neural
             net, saves all these values, and plugs them into a kind of
-            percentron that gives a score out of 1 of how likely a stock is to
+            perceptron that gives a score out of 1 of how likely a stock is to
             rise next week.
           </Text>
           <Text style={styles.subsubText}>

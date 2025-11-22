@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 function CurRank() {
   const [csvData, setCsvData] = useState([]);
-  const csvFileUrl = "https://benthebenno.github.io/jesse_score_rankings.csv"; // Replace with your actual URL
+  const csvFileUrl = "https://markiAI.github.io/jesse_score_rankings.csv"; // Replace with your actual URL
 
   readRemoteFile(csvFileUrl, {
     complete: (results) => {
@@ -60,9 +60,7 @@ function CurRank() {
                 <View style={styles.singleItem}>
                   <Text style={{ color: "white" }}>{item.Rank}</Text>
                   <Text style={{ color: "white" }}>{item.Stock}</Text>
-                  <Text style={{ color: "white" }}>
-                    {item.Predicted_Change_Percent}
-                  </Text>
+                  <Text style={{ color: "white" }}>{item.Score}</Text>
                 </View>
               )}
               keyExtractor={(item, index) => index.toString()}

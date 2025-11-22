@@ -20,7 +20,7 @@ function DetailScreen({ route }) {
     imagePathAll,
   } = route.params;
   const navigation = useNavigation();
-  const csvFileUrl = "https://benthebenno.github.io/jesse_score_rankings.csv"; // Replace with your actual URL
+  const csvFileUrl = "https://markiAI.github.io/jesse_score_rankings.csv"; // Replace with your actual URL
   const [csvData, setCsvData] = useState([]);
 
   readRemoteFile(csvFileUrl, {
@@ -69,9 +69,7 @@ function DetailScreen({ route }) {
                   <View style={styles.manyItems} key={index}>
                     <Text style={styles.miniText}>Rank: {item.Rank}</Text>
                     <Text style={styles.miniText}>Stock: {item.Stock}</Text>
-                    <Text style={styles.miniText}>
-                      Change: {item.Predicted_Change_Percent}
-                    </Text>
+                    <Text style={styles.miniText}>Score: {item.Score}</Text>
                   </View>
                 ))
             ) : (

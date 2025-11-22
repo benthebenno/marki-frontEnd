@@ -43,7 +43,7 @@ function StockList() {
             style={styles.image}
             source={{
               uri:
-                "https://benthebenno.github.io/" +
+                "https://markiAI.github.io/graphsss/" +
                 item.title[0] +
                 "/" +
                 item.title +
@@ -62,19 +62,19 @@ function StockList() {
                 pageContent: "hlrpprtgrlpglrg",
                 pageId: item.id,
                 imagePath2Weeks:
-                  "https://benthebenno.github.io/" +
+                  "https://markiAI.github.io/graphsss/" +
                   item.title[0] +
                   "/" +
                   item.title +
                   "_2weeks.png",
                 imagePath1Month:
-                  "https://benthebenno.github.io/" +
+                  "https://markiAI.github.io/graphsss/" +
                   item.title[0] +
                   "/" +
                   item.title +
                   "_1month.png",
                 imagePathAll:
-                  "https://benthebenno.github.io/" +
+                  "https://markiAI.github.io/graphsss/" +
                   item.title[0] +
                   "/" +
                   item.title +

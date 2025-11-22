@@ -14,28 +14,27 @@ function TopBar() {
         style={{
           flexDirection: "row",
           alignItems: "center",
-
-          paddingRight: 100,
+          marginRight: 10,
+          // paddingRight: 100,
         }}
       >
         <Image
           source={require("../images/MarkyLogo.png")}
           style={styles.image}
         ></Image>
-        <Text
-          style={{ fontSize: 20, color: "white", marginLeft: 10 }}
-          onPress={() => navigation.navigate("CurRank")}
-        >
+        <Text style={{ fontSize: 20, color: "white", marginLeft: 10 }}>
           Home
         </Text>
       </Pressable>
       <Pressable>
-        <Text
-          style={{ fontSize: 20, color: "white" }}
-          onPress={() => navigation.navigate("CurRank")}
-        >
-          Rankings
-        </Text>
+        <View>
+          <Text
+            style={{ fontSize: 20, color: "white" }}
+            onPress={() => navigation.navigate("CurRank")}
+          >
+            Rankings
+          </Text>
+        </View>
       </Pressable>
       <Pressable>
         <Text

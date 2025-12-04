@@ -50,7 +50,7 @@ function CurRank() {
         <View style={styles.heading}>
           <Text style={{ color: "white" }}>Rank</Text>
           <Text style={{ color: "white" }}>Stock-Percent</Text>
-          <Text style={{ color: "white" }}>Change</Text>
+          <Text style={{ color: "white" }}>Score</Text>
         </View>
         <View style={{ flex: 1, paddingTop: 15 }}>
           {csvData.length > 0 ? (
